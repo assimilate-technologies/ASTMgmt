@@ -8,9 +8,9 @@ namespace ASTMGMTDS.Interfaces
 {
     interface IGenericRepository<T> where T: class
     {
-        T  Add(T t);
-        T Update(T t);
-        T Delete(T t);
+        void Add(T t);
+        void Update(T t);
+        void Delete(T t);
 
         IEnumerable<T> GetAllPageWise(int PageIndex, int RecordPerPage);
         IEnumerable<T> GetAll();

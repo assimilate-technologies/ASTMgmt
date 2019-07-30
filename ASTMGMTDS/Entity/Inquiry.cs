@@ -10,7 +10,7 @@ namespace ASTMGMTDS.Entity {
     {
         
         public string FirstName { get; set; }
-        public string LasttName  { get; set; }
+        public string LastName  { get; set; }
         public string EmailID { get; set; }
         public string Mobile { get; set; }
         public string AlternateMobile { get; set; }

@@ -5,24 +5,40 @@ using System.Text;
 using System.Threading.Tasks;
 using ASTMGMTDS.Entity;
 using ASTMGMTDS.Interfaces;
+using System.Data.SqlClient;
+using System.Data;
+using System.Configuration;
+using ASTMGMTDS.DataAccess;
 
 namespace ASTMGMTDS.Repositories
 {
-    class InquiryRepository : IGenericRepository<Inquiry>
+    class InquiryRepository : RepositoryBase, IGenericRepository<Inquiry>
     {
-        public Inquiry Add(Inquiry t)
+        
+
+        public void Add(Inquiry t)
         {
-            throw new NotImplementedException();
+            using (IUnitOfWork unitOfWork = new UnitOfWork())
+            {
+                //SqlParameterCollection sqlParameterCollection = new SqlParameterCollection();
+                //sqlParameterCollection.Add("@FirstName", SqlDbType.VarChar).Value = t.FirstName;
+                //sqlParameterCollection.Add("@LastName", SqlDbType.VarChar).Value = t.LastName;
+
+                ExecuteNonQuery("sp_Add_Inquiry", CommandType.StoredProcedure, null,null);
+               
+            };
         }
 
-        public Inquiry Delete(Inquiry t)
+        public void Delete(Inquiry t)
         {
             throw new NotImplementedException();
         }
 
         public IEnumerable<Inquiry> GetAll()
         {
-            throw new NotImplementedException();
+           DataTable dt= ExecuteSelect("getAllInquiry", CommandType.StoredProcedure, DataHelper.getSqlconnection(),null);
+            var inquiryList = new List<Inquiry>();
+            return inquiryList;
         }
 
         public IEnumerable<Inquiry> GetAllPageWise(int PageIndex, int RecordPerPage)
@@ -35,7 +51,7 @@ namespace ASTMGMTDS.Repositories
             throw new NotImplementedException();
         }
 
-        public Inquiry Update(Inquiry t)
+        public void Update(Inquiry t)
         {
             throw new NotImplementedException();
         }
