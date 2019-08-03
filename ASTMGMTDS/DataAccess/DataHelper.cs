@@ -12,7 +12,7 @@ namespace ASTMGMTDS.DataAccess
     {
         public static SqlConnection getSqlconnection()
         {
-            return new SqlConnection(ConfigurationManager.ConnectionStrings["DTAppCon"].ConnectionString);
+            return new SqlConnection(ConfigurationManager.ConnectionStrings["dbAssimilate"].ConnectionString);
 
         }
 

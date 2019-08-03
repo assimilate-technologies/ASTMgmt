@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ASTMGMTDS.DataAccess
 {
-    class RepositoryBase
+    public class RepositoryBase
     {
        public DataSet ExecuteSelects(string commandText, CommandType commandType, 
             SqlConnection sqlConnection,SqlParameterCollection sqlParameterCollection)
@@ -23,6 +23,8 @@ namespace ASTMGMTDS.DataAccess
                     }
                 }
                 DataSet ds = new DataSet();
+                //todo need to think if this is right place to open connection
+                if (command.Connection.State == ConnectionState.Closed) command.Connection.Open();
                 DataHelper.getAdapter(command).Fill(ds);
                 return ds;
             }
