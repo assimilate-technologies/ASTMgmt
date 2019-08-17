@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ASTMGMTDS.Interfaces
 {
-    interface IGenericRepository<T> where T: class
+    interface IGenericRepository<T,id> where T: class
     {
-        void Add(T t);
+        id Add(T t);
         void Update(T t);
         void Delete(T t);
 

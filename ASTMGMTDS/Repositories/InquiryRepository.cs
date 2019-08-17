@@ -12,21 +12,20 @@ using ASTMGMTDS.DataAccess;
 
 namespace ASTMGMTDS.Repositories
 {
-    class InquiryRepository : RepositoryBase, IGenericRepository<Inquiry>
+    public class InquiryRepository : RepositoryBase, IGenericRepository<Inquiry,int>
     {
-        
-
-        public void Add(Inquiry t)
+        IUnitOfWork<SqlConnection, SqlTransaction> _unitOfWork;
+        public InquiryRepository(IUnitOfWork<SqlConnection,SqlTransaction> unitOfWork)
         {
-            using (IUnitOfWork unitOfWork = new UnitOfWork())
-            {
+            _unitOfWork = unitOfWork;
+        }
+        public int Add(Inquiry t)
+        {
                 //SqlParameterCollection sqlParameterCollection = new SqlParameterCollection();
                 //sqlParameterCollection.Add("@FirstName", SqlDbType.VarChar).Value = t.FirstName;
                 //sqlParameterCollection.Add("@LastName", SqlDbType.VarChar).Value = t.LastName;
 
-                ExecuteNonQuery("sp_Add_Inquiry", CommandType.StoredProcedure, null,null);
-               
-            };
+             return ExecuteNonQuery("sp_Add_Inquiry", CommandType.StoredProcedure, _unitOfWork.Connection, null);                         
         }
 
         public void Delete(Inquiry t)
@@ -55,5 +54,8 @@ namespace ASTMGMTDS.Repositories
         {
             throw new NotImplementedException();
         }
+
+       
+       
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using ASTMgmt.BusinessLogic;
 using ASTMGMTDS.Entity;
 using ASTMGMTDS.Repositories;
 
@@ -14,7 +15,7 @@ namespace ASTMgmt.Controllers
 		// GET api/values
 		public IEnumerable<Student> Get()
 		{
-            return new StudentRepository().GetAll();
+            return new StudentBL().GetAll();
 		}
 
 		// GET api/values/5

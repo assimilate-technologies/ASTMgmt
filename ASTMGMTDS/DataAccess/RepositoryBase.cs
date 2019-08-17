@@ -36,11 +36,23 @@ namespace ASTMGMTDS.DataAccess
             return ExecuteSelects(commandText, commandType,sqlConnection, 
                 sqlParameterCollection).Tables[0];
         }
-        public DataTable ExecuteNonQuery(string commandText, CommandType commandType,
+        public int ExecuteNonQuery(string commandText, CommandType commandType,
             SqlConnection sqlConnection, SqlParameterCollection sqlParameterCollection)
         {
-            return ExecuteSelects(commandText, commandType, sqlConnection,
-                sqlParameterCollection).Tables[0];
+            using (SqlCommand command = DataHelper.getCommand(commandText, commandType, sqlConnection))
+            {
+                if (sqlParameterCollection != null)
+                {
+                    foreach (SqlParameter parameter in sqlParameterCollection)
+                    {
+                        command.Parameters.Add(parameter);
+                    }
+                }
+                //todo need to think if this is right place to open connection
+                if (command.Connection.State == ConnectionState.Closed) command.Connection.Open();
+                return  command.ExecuteNonQuery();
+            }
+
         }
 
 

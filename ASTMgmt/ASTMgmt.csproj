@@ -127,11 +127,16 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="BusinessLogic\InquiryBL.cs" />
+    <Compile Include="BusinessLogic\StudentBL.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Mapper\InquiryMapper.cs" />
+    <Compile Include="Mapper\StudentMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\InquiryViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />

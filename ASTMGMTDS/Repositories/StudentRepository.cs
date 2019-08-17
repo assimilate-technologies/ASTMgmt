@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,21 +11,23 @@ using ASTMGMTDS.Interfaces;
 
 namespace ASTMGMTDS.Repositories
 {
-    public class StudentRepository : RepositoryBase, IGenericRepository<Student>
+    public class StudentRepository : RepositoryBase, IGenericRepository<Student,int>
     {
-
-
-        public void Add(Student t)
+        IUnitOfWork<SqlConnection, SqlTransaction> _unitOfWork;
+        public StudentRepository(IUnitOfWork<SqlConnection, SqlTransaction> unitOfWork)
         {
-            using (IUnitOfWork unitOfWork = new UnitOfWork())
-            {
+            _unitOfWork = unitOfWork;
+        }
+
+        public int Add(Student t)
+        {
+            
                 //SqlParameterCollection sqlParameterCollection = new SqlParameterCollection();
                 //sqlParameterCollection.Add("@FirstName", SqlDbType.VarChar).Value = t.FirstName;
                 //sqlParameterCollection.Add("@LastName", SqlDbType.VarChar).Value = t.LastName;
 
-                ExecuteNonQuery("sp_Add_Inquiry", CommandType.StoredProcedure, null, null);
-
-            };
+              return ExecuteNonQuery("sp_Add_Inquiry", CommandType.StoredProcedure, _unitOfWork.Connection, null);
+                       
         }
 
         public void Delete(Student t)
@@ -34,7 +37,7 @@ namespace ASTMGMTDS.Repositories
 
         public IEnumerable<Student> GetAll()
         {
-            DataTable dt = ExecuteSelect("select * from tblStudent", CommandType.Text, DataHelper.getSqlconnection(), null);
+            DataTable dt = ExecuteSelect("select * from tblStudent", CommandType.Text, _unitOfWork.Connection, null);
             List<Student> studentList = dt.AsEnumerable().Select(row => new Student()
             {
                 studId = row.Field<int>("studId"),

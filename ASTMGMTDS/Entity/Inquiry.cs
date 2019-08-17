@@ -9,19 +9,12 @@ namespace ASTMGMTDS.Entity {
     public class Inquiry:IEntity<int>
     {
         
-        public string FirstName { get; set; }
-        public string LastName  { get; set; }
-        public string EmailID { get; set; }
-        public string Mobile { get; set; }
-        public string AlternateMobile { get; set; }
-        public string AlternateEMail { get; set; }
-        public string CurrentAcademicStandard { get; set; }
-        public string AddressLine1{ get; set; }
-        public string AddressLine2{ get; set; }
-        public string AddressLine3{ get; set; }
-        public string City { get; set; }
+     
         public string Reference{ get; set; }
-        public DateTime DateOfBirth { get; set; }
+        public string Course{ get; set; }
+        public int StudId{ get; set; }
+
         public int ID { get ; set ; }
+
     }
 }
