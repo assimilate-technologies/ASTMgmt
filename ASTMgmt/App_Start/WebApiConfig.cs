@@ -12,6 +12,7 @@ namespace ASTMgmt
             // Web API configuration and services
 
             // Web API routes
+            config.MessageHandlers.Add(new Interceptor());
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(

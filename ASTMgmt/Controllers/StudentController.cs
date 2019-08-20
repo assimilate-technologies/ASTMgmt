@@ -13,10 +13,20 @@ namespace ASTMgmt.Controllers
 	public class StudentController : ApiController
 	{
 		// GET api/values
+        [Authorize]
 		public IEnumerable<Student> Get()
 		{
-            return new StudentBL().GetAll();
-		}
+            //need to delete below code as it is for only testing purpose
+            var st = new Student() { studId = 1, studName = "rajesh", studEmail = "abc.com" };
+            var st1 = new Student() { studId = 1, studName = "ramesh", studEmail = "abc.com" };
+            List <Student> StudList = new List<Student>();
+            StudList.Add(st);
+            StudList.Add(st1);
+            return StudList;
+
+            //need to uncomment below line
+            //return new StudentBL().GetAll();
+        }
 
 		// GET api/values/5
 		public string Get(int id)

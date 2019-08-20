@@ -5,7 +5,7 @@ using System.Web;
 
 namespace ASTMgmt.ViewModels
 {
-    public class InquiryViewModel
+    public class InquiryViewModel : BaseViewModel
     {
         public string Reference { get; set; }
         public string Course { get; set; }
