@@ -2,16 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
+
+
+
 
 namespace ASTMgmt.ViewModels
 {
     public class InquiryViewModel : BaseViewModel
     {
         public string Reference { get; set; }
+        [Required(ErrorMessage ="Course name is mandatory")]
         public string Course { get; set; }
         public int ID { get; set; }
 
         public int studId { get; set; }
+        [Required(ErrorMessage = "Student name is mandatory")]
+
         public string studName { get; set; }
         public long studPhoneNo { get; set; }
         public string studEmail { get; set; }

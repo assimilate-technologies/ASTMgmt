@@ -148,6 +148,7 @@
     <Compile Include="BusinessLogic\LoginBL.cs" />
     <Compile Include="BusinessLogic\StudentBL.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Controllers\InquiryController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Global.asax.cs">
